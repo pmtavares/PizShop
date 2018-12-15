@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Pedro
+ * Implement Business layer in the future
  */
 public class ClientController {
     
