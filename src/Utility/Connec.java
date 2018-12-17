@@ -27,7 +27,7 @@ public class Connec {
         {
             Con = DriverManager.getConnection(URL, USER, PASSWORD);
             Con.setAutoCommit(false); //disable commit
-            JOptionPane.showMessageDialog(null,"Connected to DB","Success", 1);
+            //JOptionPane.showMessageDialog(null,"Connected to DB","Success", 1);
         }
         catch(Exception ex)
         {

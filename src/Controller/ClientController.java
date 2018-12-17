@@ -23,20 +23,25 @@ public class ClientController {
     {
         if(client.getName().equals(""))
         {
-            JOptionPane.showMessageDialog(null,"Fill out the name.","Error", 0, new ImageIcon("/images/delete.png"));
+            JOptionPane.showMessageDialog(null,"Fill out the name.","Error", JOptionPane.WARNING_MESSAGE, new ImageIcon("./images/delete.png"));
             return false;
         }
         if(client.getRegion().equals(""))
         {
-            JOptionPane.showMessageDialog(null,"Fill out the region.","Error", 0, new ImageIcon("/images/delete.png"));
+            JOptionPane.showMessageDialog(null,"Fill out the region.","Error", JOptionPane.WARNING_MESSAGE, new ImageIcon("./images/delete.png"));
             return false;
         }
         if(client.getStreet().equals(""))
         {
-            JOptionPane.showMessageDialog(null,"Fill out the street.","Error", 0, new ImageIcon("/images/delete.png"));
+            JOptionPane.showMessageDialog(null,"Fill out the street.","Error", JOptionPane.WARNING_MESSAGE, new ImageIcon("./images/delete.png"));
             return false;
         }
         clientDao.registerClient(client);
         return true;
+    }
+    
+    public String checkNextCLient()
+    {
+        return clientDao.nextClient();
     }
 }

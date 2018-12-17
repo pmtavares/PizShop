@@ -1,11 +1,14 @@
 package GUI;
 
+import Beans.ClientBeans;
+import Controller.ClientController;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,13 +22,19 @@ public class ClientScreen extends javax.swing.JInternalFrame {
     
     MaskFormatter formatPhone;
     SimpleDateFormat formatDate;
-    
+    ClientBeans clientB;
+    ClientController clientController;
+    DefaultTableModel tModel;
     
     public ClientScreen() {
         initComponents();        
         setCurrentDate(txt_date);
+        clientB = new ClientBeans();
+        clientController = new ClientController();
+        tModel = (DefaultTableModel)tb_clients.getModel();
     }
 
+    
 
     private void setCurrentDate(JTextField field)
     {
@@ -39,7 +48,7 @@ public class ClientScreen extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_code = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txt_name = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -63,8 +72,9 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         jTextField7 = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tb_clients = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        btn_register = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -78,10 +88,10 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Code:");
 
-        jTextField1.setEditable(false);
-        jTextField1.setEnabled(false);
-        jTextField1.setName("txt_code"); // NOI18N
-        jTextField1.setOpaque(false);
+        txt_code.setEditable(false);
+        txt_code.setEnabled(false);
+        txt_code.setName("txt_code"); // NOI18N
+        txt_code.setOpaque(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Name:");
@@ -119,7 +129,7 @@ public class ClientScreen extends javax.swing.JInternalFrame {
 
         jTextField7.setName("txt_search"); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tb_clients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -130,14 +140,24 @@ public class ClientScreen extends javax.swing.JInternalFrame {
                 "Code", "Name", "Street", "Region", "Phone"
             }
         ));
-        jTable1.setName("tb_clients"); // NOI18N
-        jScrollPane1.setViewportView(jTable1);
+        tb_clients.setName("tb_clients"); // NOI18N
+        jScrollPane1.setViewportView(tb_clients);
 
         jButton1.setLabel("New");
         jButton1.setName("btnNew"); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        btn_register.setText("Register");
+        btn_register.setMaximumSize(new java.awt.Dimension(57, 23));
+        btn_register.setMinimumSize(new java.awt.Dimension(57, 23));
+        btn_register.setName("btn_register"); // NOI18N
+        btn_register.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_registerActionPerformed(evt);
             }
         });
 
@@ -157,7 +177,7 @@ public class ClientScreen extends javax.swing.JInternalFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txt_code, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -180,7 +200,10 @@ public class ClientScreen extends javax.swing.JInternalFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -189,7 +212,7 @@ public class ClientScreen extends javax.swing.JInternalFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_code, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -219,20 +242,33 @@ public class ClientScreen extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
+
+        btn_register.getAccessibleContext().setAccessibleName("btn_register");
+        btn_register.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         enableFields(true);
+        txt_code.setText(clientController.checkNextCLient());
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
+        fillClientBeans();
+        clientController.verifyData(clientB);
+        cleanFields();
+    }//GEN-LAST:event_btn_registerActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_register;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -244,9 +280,9 @@ public class ClientScreen extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTable tb_clients;
+    private javax.swing.JTextField txt_code;
     private javax.swing.JTextField txt_date;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_phone;
@@ -262,4 +298,22 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         txt_date.setEnabled(value);
         txt_phone.setEnabled(value);
     } 
+    
+    final void fillClientBeans()
+    {
+        clientB.setName(txt_name.getText());
+        clientB.setPhone(txt_phone.getText());
+        clientB.setRegion(txt_region.getText());
+        clientB.setStreet(txt_street.getText());
+        clientB.setDateReg(txt_date.getText());
+    }
+    
+    final void cleanFields()
+    {
+        txt_name.setText("");
+        txt_street.setText("");
+        txt_region.setText("");
+        txt_date.setText("");
+        txt_phone.setText("");
+    }
 }
