@@ -4,6 +4,7 @@ import Beans.ClientBeans;
 import DAO.ClientDAO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -43,5 +44,10 @@ public class ClientController {
     public String checkNextCLient()
     {
         return clientDao.nextClient();
+    }
+    
+    public void controlSearch(String search, DefaultTableModel model)
+    {
+        clientDao.searchClient(search, model);
     }
 }

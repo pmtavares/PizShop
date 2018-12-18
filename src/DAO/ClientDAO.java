@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -63,6 +64,24 @@ public class ClientDAO {
             Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null,"Error to open last record!","Error", 0, new ImageIcon("./images/btn_sair.png"));
             return "0";
+        }
+    }
+    
+    
+    public void searchClient(String search, DefaultTableModel model)
+    {
+        String SQLSelection = "SELECT * FROM clients WHERE cli_name LIKE '%" + search + "%' ";
+        try {            
+            PreparedStatement st = Connec.getConnection().prepareStatement(SQLSelection);
+            ResultSet rs = st.executeQuery();
+            while(rs.next())
+            {
+                model.addRow(new Object[]{rs.getString("cli_cod"),rs.getString("cli_name"),rs.getString("cli_street"),rs.getString("cli_region"),rs.getString("cli_phone")});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Error to search client","Error", 0, new ImageIcon("./images/btn_sair.png"));
+            
         }
     }
     

@@ -5,10 +5,12 @@
         <group>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/Pizzeria/src/GUI/ClientScreen.java</file>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/Pizzeria/src/Utility/ScreenBackground.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/Pizzeria/src/DAO/ClientDAO.java</file>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/Pizzeria/src/Utility/Connec.java</file>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/Pizzeria/src/GUI/Main.java</file>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/Pizzeria/src/Utility/Corrector.java</file>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/Pizzeria/src/Beans/ClientBeans.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/Pizzeria/src/Controller/ClientController.java</file>
         </group>
     </open-files>
 </project-private>

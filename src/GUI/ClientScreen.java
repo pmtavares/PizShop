@@ -27,11 +27,11 @@ public class ClientScreen extends javax.swing.JInternalFrame {
     DefaultTableModel tModel;
     
     public ClientScreen() {
-        initComponents();        
-        setCurrentDate(txt_date);
+        initComponents();       
         clientB = new ClientBeans();
         clientController = new ClientController();
         tModel = (DefaultTableModel)tb_clients.getModel();
+        //tModel.addRow(new Object[]{1,"Pedro", "street", "Rathborne", "1212231"});
     }
 
     
@@ -69,11 +69,11 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         txt_date = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txt_search = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_clients = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnNew = new javax.swing.JButton();
         btn_register = new javax.swing.JButton();
 
         setClosable(true);
@@ -127,33 +127,45 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Search:");
 
-        jTextField7.setName("txt_search"); // NOI18N
+        txt_search.setName("txt_search"); // NOI18N
+        txt_search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_searchKeyReleased(evt);
+            }
+        });
 
         tb_clients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Code", "Name", "Street", "Region", "Phone"
             }
         ));
+        tb_clients.setCellSelectionEnabled(true);
         tb_clients.setName("tb_clients"); // NOI18N
+        tb_clients.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tb_clients);
 
-        jButton1.setLabel("New");
-        jButton1.setName("btnNew"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/insert.png"))); // NOI18N
+        btnNew.setText("");
+        btnNew.setToolTipText("New Record");
+        btnNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnNew.setMaximumSize(new java.awt.Dimension(97, 23));
+        btnNew.setMinimumSize(new java.awt.Dimension(97, 23));
+        btnNew.setName("btnNew"); // NOI18N
+        btnNew.setPreferredSize(new java.awt.Dimension(97, 23));
+        btnNew.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnNewActionPerformed(evt);
             }
         });
 
-        btn_register.setText("Register");
-        btn_register.setMaximumSize(new java.awt.Dimension(57, 23));
-        btn_register.setMinimumSize(new java.awt.Dimension(57, 23));
+        btn_register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/save.png"))); // NOI18N
+        btn_register.setToolTipText("Save Record");
+        btn_register.setMaximumSize(new java.awt.Dimension(97, 73));
+        btn_register.setMinimumSize(new java.awt.Dimension(97, 73));
         btn_register.setName("btn_register"); // NOI18N
         btn_register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,13 +210,13 @@ public class ClientScreen extends javax.swing.JInternalFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                        .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,16 +248,16 @@ public class ClientScreen extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         btn_register.getAccessibleContext().setAccessibleName("btn_register");
@@ -254,10 +266,11 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        setCurrentDate(txt_date);
         enableFields(true);
         txt_code.setText(clientController.checkNextCLient());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnNewActionPerformed
 
     private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
         fillClientBeans();
@@ -265,11 +278,16 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         cleanFields();
     }//GEN-LAST:event_btn_registerActionPerformed
 
+    private void txt_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchKeyReleased
+        tModel.setNumRows(0);
+        clientController.controlSearch(txt_search.getText(), tModel);
+    }//GEN-LAST:event_txt_searchKeyReleased
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNew;
     private javax.swing.JButton btn_register;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -280,13 +298,13 @@ public class ClientScreen extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTable tb_clients;
     private javax.swing.JTextField txt_code;
     private javax.swing.JTextField txt_date;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_phone;
     private javax.swing.JTextField txt_region;
+    private javax.swing.JTextField txt_search;
     private javax.swing.JTextField txt_street;
     // End of variables declaration//GEN-END:variables
    
