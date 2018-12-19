@@ -20,6 +20,7 @@ public class ClientDAO {
     
     public ClientDAO()
     {
+        
     }
     
     public void registerClient(ClientBeans client)
@@ -82,6 +83,53 @@ public class ClientDAO {
             Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null,"Error to search client","Error", 0, new ImageIcon("./images/btn_sair.png"));
             
+        }
+    }
+    
+    public ClientBeans fillFields(int code)
+    {        
+        ClientBeans clientBeans =  new ClientBeans();
+        String SQLSelection = "SELECT * FROM clients WHERE cli_cod = ?";
+        
+        try {            
+            PreparedStatement st = Connec.getConnection().prepareStatement(SQLSelection);
+            st.setInt(1, code);
+            ResultSet rs = st.executeQuery();
+            if(rs.next())
+            {
+                clientBeans.setCode(rs.getInt("cli_cod"));
+                clientBeans.setName(rs.getString("cli_name"));
+                clientBeans.setStreet(rs.getString("cli_street"));
+                clientBeans.setRegion(rs.getString("cli_region"));
+                clientBeans.setPhone(rs.getString("cli_phone"));
+                clientBeans.setDateReg(Corrector.ConvertToJava(rs.getString("cli_data_reg")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Error to select client","Error", 0, new ImageIcon("./images/btn_sair.png"));          
+        }
+        return clientBeans;
+    }
+    
+    public void editClient(ClientBeans client)
+    {
+         try {
+            String SQLInsertion = "UPDATE clients set cli_name = ?,  cli_phone = ?, cli_region = ?, cli_street = ? where cli_cod = ? ";
+            PreparedStatement st = Connec.getConnection().prepareStatement(SQLInsertion);
+            
+            st.setString(1, client.getName());
+            st.setString(2, client.getPhone());
+            st.setString(3, client.getRegion());
+            st.setString(4, client.getStreet());
+            st.setInt(5, client.getCode());
+            
+            st.execute();
+            Connec.getConnection().commit(); //enable commit
+            JOptionPane.showMessageDialog(null,"Registration edited.","Saved", 0, new ImageIcon("./images/ok.png"));
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Error: " + ex.getMessage(),"Error", 0, new ImageIcon("./images/btn_sair.png"));
         }
     }
     

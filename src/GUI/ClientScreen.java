@@ -75,6 +75,7 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         tb_clients = new javax.swing.JTable();
         btnNew = new javax.swing.JButton();
         btn_register = new javax.swing.JButton();
+        btn_edit = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -145,6 +146,11 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         tb_clients.setCellSelectionEnabled(true);
         tb_clients.setName("tb_clients"); // NOI18N
         tb_clients.getTableHeader().setReorderingAllowed(false);
+        tb_clients.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_clientsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_clients);
 
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/insert.png"))); // NOI18N
@@ -170,6 +176,15 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         btn_register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_registerActionPerformed(evt);
+            }
+        });
+
+        btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
+        btn_edit.setToolTipText("Save Record");
+        btn_edit.setName("btn_register"); // NOI18N
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
             }
         });
 
@@ -215,7 +230,9 @@ public class ClientScreen extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -254,9 +271,11 @@ public class ClientScreen extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_edit))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -283,10 +302,27 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         clientController.controlSearch(txt_search.getText(), tModel);
     }//GEN-LAST:event_txt_searchKeyReleased
 
+    private void tb_clientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientsMouseClicked
+        //Get code of the selected row
+        int codePassed = Integer.parseInt(tModel.getValueAt(tb_clients.getSelectedRow(),0).toString());
+        clientB = clientController.fillFields(codePassed);
+        txt_code.setText(clientB.getCode() + "");
+        txt_name.setText(clientB.getName());
+        txt_street.setText(clientB.getStreet());
+        txt_region.setText(clientB.getRegion());
+    }//GEN-LAST:event_tb_clientsMouseClicked
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        fillClientBeans();
+        clientController.verifyDataEdit(clientB);
+        cleanFields();
+    }//GEN-LAST:event_btn_editActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNew;
+    private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_register;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

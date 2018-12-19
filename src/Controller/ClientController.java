@@ -41,6 +41,27 @@ public class ClientController {
         return true;
     }
     
+    public boolean verifyDataEdit(ClientBeans client)
+    {
+        if(client.getName().equals(""))
+        {
+            JOptionPane.showMessageDialog(null,"Fill out the name.","Error", JOptionPane.WARNING_MESSAGE, new ImageIcon("./images/delete.png"));
+            return false;
+        }
+        if(client.getRegion().equals(""))
+        {
+            JOptionPane.showMessageDialog(null,"Fill out the region.","Error", JOptionPane.WARNING_MESSAGE, new ImageIcon("./images/delete.png"));
+            return false;
+        }
+        if(client.getStreet().equals(""))
+        {
+            JOptionPane.showMessageDialog(null,"Fill out the street.","Error", JOptionPane.WARNING_MESSAGE, new ImageIcon("./images/delete.png"));
+            return false;
+        }
+        clientDao.editClient(client);
+        return true;
+    }
+    
     public String checkNextCLient()
     {
         return clientDao.nextClient();
@@ -49,5 +70,10 @@ public class ClientController {
     public void controlSearch(String search, DefaultTableModel model)
     {
         clientDao.searchClient(search, model);
+    }
+    
+    public  ClientBeans fillFields(int code)
+    {
+       return clientDao.fillFields(code);
     }
 }
