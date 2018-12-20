@@ -1,5 +1,6 @@
 package Utility;
 
+import GUI.Main;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -15,7 +16,8 @@ public class ScreenBackground extends JDesktopPane {
     
     public ScreenBackground(String image)
     {
-        this.image = new ImageIcon(image).getImage();
+        //this.image = new ImageIcon(image).getImage();
+        this.image = new ImageIcon(Main.class.getResource(image)).getImage();
     }
     
     //Draw Image to background

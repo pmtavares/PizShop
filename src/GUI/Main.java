@@ -2,7 +2,10 @@ package GUI;
 
 import Utility.ScreenBackground;
 import java.awt.GridLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+
 
 /**
  *
@@ -17,64 +20,109 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new GridLayout());
-        screen = new ScreenBackground("images/pizzeria-background1.jpg");        
+       // screen = new ScreenBackground("src/Icons/pizzeria-background1.jpg");  
+       screen = new ScreenBackground("/Icons/pizzeria-background1.jpg");
         getContentPane().add(screen);
+        //Menu Icons
+        setMenuIcons(main_menu);
+        //Form Icon
+        setFormIconImage();
+        
+    }
+    
+    private void setMenuIcons(JMenuBar menu)
+    {
+       //One way to insert icons. This way, we dont need to create a folder after building in order
+       // to show the images
+       menu.getMenu(0).setIcon(new ImageIcon(getClass().getResource("/Icons/insert-32.png")));       
+       menu.getMenu(1).setIcon(new ImageIcon(getClass().getResource("/Icons/ico_till.png")));
+       menu.getMenu(2).setIcon(new ImageIcon(getClass().getResource("/Icons/ico_rep.png")));
+       menu.getMenu(3).setIcon(new ImageIcon(getClass().getResource("/Icons/ico_exit.png")));
+       //Sub Menus: Second way to insert icons. The line below is with a folder with the images
+       //menu.getMenu(0).getItem(0).setIcon(new ImageIcon("src/Icons/ico_clients.png"));
+       menu.getMenu(0).getItem(0).setIcon(new ImageIcon(getClass().getResource("/Icons/ico_clients.png")));
+       menu.getMenu(0).getItem(1).setIcon(new ImageIcon(getClass().getResource("/Icons/ico_staff.png")));
+       menu.getMenu(0).getItem(2).setIcon(new ImageIcon(getClass().getResource("/Icons/ico_menu.png")));
+       menu.getMenu(0).getItem(3).setIcon(new ImageIcon(getClass().getResource("/Icons/ico_boy.png")));
     }
 
+    private void setFormIconImage()
+    {
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/ico_menu.png"));
+        setIconImage(icon.getImage());
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
+        main_menu = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menu_client = new javax.swing.JMenuItem();
         menuStaff = new javax.swing.JMenuItem();
         menuMenu = new javax.swing.JMenuItem();
         menuDeliverer = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menu_till = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        menu_report = new javax.swing.JMenu();
+        menu_exit = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tavares Pizzeria");
 
-        jMenu1.setText("Register");
+        main_menu.setName("main_menu"); // NOI18N
 
-        jMenuItem1.setText("Clients");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenu1.setText("Register");
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        menu_client.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menu_client.setText("Clients");
+        menu_client.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menu_client.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menu_clientActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(menu_client);
 
+        menuStaff.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         menuStaff.setText("Staff");
+        menuStaff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu1.add(menuStaff);
 
+        menuMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         menuMenu.setText("Menu");
+        menuMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu1.add(menuMenu);
 
+        menuDeliverer.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         menuDeliverer.setText("Deliverer");
+        menuDeliverer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu1.add(menuDeliverer);
 
-        jMenuBar1.add(jMenu1);
+        main_menu.add(jMenu1);
 
-        jMenu2.setText("Cashier");
+        menu_till.setText("Cashier");
+        menu_till.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menu_till.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMenuItem5.setText("Orders");
-        jMenu2.add(jMenuItem5);
+        menu_till.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu2);
+        main_menu.add(menu_till);
 
-        jMenu3.setText("Reports");
-        jMenuBar1.add(jMenu3);
+        menu_report.setText("Reports");
+        menu_report.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menu_report.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        main_menu.add(menu_report);
 
-        jMenu4.setText("Exit");
-        jMenuBar1.add(jMenu4);
+        menu_exit.setText("Exit");
+        menu_exit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menu_exit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        main_menu.add(menu_exit);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(main_menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,18 +132,18 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 278, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menu_clientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_clientActionPerformed
         // Client screen:
         clientScreen = new ClientScreen();
         screen.add(clientScreen);
         clientScreen.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menu_clientActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,14 +182,14 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuBar main_menu;
     private javax.swing.JMenuItem menuDeliverer;
     private javax.swing.JMenuItem menuMenu;
     private javax.swing.JMenuItem menuStaff;
+    private javax.swing.JMenuItem menu_client;
+    private javax.swing.JMenu menu_exit;
+    private javax.swing.JMenu menu_report;
+    private javax.swing.JMenu menu_till;
     // End of variables declaration//GEN-END:variables
 }

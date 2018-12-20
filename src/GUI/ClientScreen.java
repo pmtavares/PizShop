@@ -154,7 +154,6 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tb_clients);
 
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/insert.png"))); // NOI18N
-        btnNew.setText("");
         btnNew.setToolTipText("New Record");
         btnNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNew.setMaximumSize(new java.awt.Dimension(97, 23));
@@ -170,8 +169,6 @@ public class ClientScreen extends javax.swing.JInternalFrame {
 
         btn_register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/save.png"))); // NOI18N
         btn_register.setToolTipText("Save Record");
-        btn_register.setMaximumSize(new java.awt.Dimension(97, 73));
-        btn_register.setMinimumSize(new java.awt.Dimension(97, 73));
         btn_register.setName("btn_register"); // NOI18N
         btn_register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,17 +269,16 @@ public class ClientScreen extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_register)
+                    .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_edit))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         btn_register.getAccessibleContext().setAccessibleName("btn_register");
         btn_register.getAccessibleContext().setAccessibleDescription("");
 
-        pack();
+        setBounds(200, 40, 600, 562);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
@@ -310,6 +306,8 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         txt_name.setText(clientB.getName());
         txt_street.setText(clientB.getStreet());
         txt_region.setText(clientB.getRegion());
+        txt_phone.setText(clientB.getPhone());
+        enableFields(true);
     }//GEN-LAST:event_tb_clientsMouseClicked
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
@@ -369,5 +367,6 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         txt_region.setText("");
         txt_date.setText("");
         txt_phone.setText("");
+        txt_search.setText("");
     }
 }
