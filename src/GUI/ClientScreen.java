@@ -19,22 +19,32 @@ public class ClientScreen extends javax.swing.JInternalFrame {
     /**
      * Creates new form ClientScreen
      */
-    
+    //Variable for Singleton pattern
+    private static ClientScreen clientScreen = null;
     MaskFormatter formatPhone;
     SimpleDateFormat formatDate;
     ClientBeans clientB;
     ClientController clientController;
     DefaultTableModel tModel;
     
+    
     public ClientScreen() {
         initComponents();       
         clientB = new ClientBeans();
         clientController = new ClientController();
         tModel = (DefaultTableModel)tb_clients.getModel();
+        
         //tModel.addRow(new Object[]{1,"Pedro", "street", "Rathborne", "1212231"});
     }
 
-    
+    public static ClientScreen getInstance()
+    {
+        if(clientScreen == null)
+        {
+            clientScreen = new ClientScreen();
+        }
+        return clientScreen;
+    }
 
     private void setCurrentDate(JTextField field)
     {
@@ -177,7 +187,7 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         });
 
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/edit.png"))); // NOI18N
-        btn_edit.setToolTipText("Save Record");
+        btn_edit.setToolTipText("Edit Record");
         btn_edit.setName("btn_register"); // NOI18N
         btn_edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,13 +282,13 @@ public class ClientScreen extends javax.swing.JInternalFrame {
                     .addComponent(btn_register)
                     .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_edit))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         btn_register.getAccessibleContext().setAccessibleName("btn_register");
         btn_register.getAccessibleContext().setAccessibleDescription("");
 
-        setBounds(200, 40, 600, 562);
+        setBounds(200, 40, 600, 588);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed

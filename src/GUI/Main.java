@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -139,10 +140,12 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_clientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_clientActionPerformed
-        // Client screen:
-        clientScreen = new ClientScreen();
-        screen.add(clientScreen);
-        clientScreen.setVisible(true);
+        clientScreen = ClientScreen.getInstance();
+        if (!clientScreen.isShowing()){
+            screen.add(clientScreen);
+            clientScreen.show();
+        }
+        
     }//GEN-LAST:event_menu_clientActionPerformed
 
     /**

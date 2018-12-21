@@ -15,16 +15,16 @@ import javax.swing.JOptionPane;
 public class Connec {
     
     //DB Local
-    /*private final String URL = "jdbc:mysql://localhost:3306/pizza";
+    private final String URL = "jdbc:mysql://localhost:3306/pizza";
     private final String DRIVER = "org.gjt.mm.mysql.Driver";
     private final String USER = "root";
-    private final String PASSWORD = ""; */
+    private final String PASSWORD = ""; 
     
     //DB Cloud
-    private final String URL = "jdbc:mysql://sql2.freemysqlhosting.net:3306/sql2270976";
+    /*private final String URL = "jdbc:mysql://server:3306/database";
     private final String DRIVER = "org.gjt.mm.mysql.Driver";
-    private final String USER = "sql2270976";
-    private final String PASSWORD = "mD4%yG3%";
+    private final String USER = "*******";
+    private final String PASSWORD = "******"; */
     private static Connection Con;
     
     public Connec()
