@@ -123,7 +123,7 @@ public class StaffScreen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Code", "Name", "Function"
+                "Code", "Name", "Function", "Data Registered"
             }
         ));
         tb_staffs.setCellSelectionEnabled(true);
@@ -247,7 +247,7 @@ public class StaffScreen extends javax.swing.JInternalFrame {
         btn_register.getAccessibleContext().setAccessibleName("btn_register");
         btn_register.getAccessibleContext().setAccessibleDescription("");
 
-        setBounds(200, 40, 600, 588);
+        setBounds(250, 40, 600, 588);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
@@ -273,7 +273,8 @@ public class StaffScreen extends javax.swing.JInternalFrame {
         staffB = staffController.fillFields(codePassed);
         txt_code.setText(staffB.getCode() + "");
         txt_name.setText(staffB.getName());
-        
+        txt_date.setText(staffB.getDateReg());
+        cb_function.setSelectedItem(staffB.getFunction());
         enableFields(true);
     }//GEN-LAST:event_tb_staffsMouseClicked
 

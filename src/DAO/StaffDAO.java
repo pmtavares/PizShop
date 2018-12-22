@@ -6,6 +6,7 @@ import Utility.Corrector;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -75,7 +76,7 @@ public class StaffDAO {
             ResultSet rs = st.executeQuery();
             while(rs.next())
             {
-                model.addRow(new Object[]{rs.getString("staff_cod"),rs.getString("name"),rs.getString("function"),rs.getString("data_reg")});
+                model.addRow(new Object[]{rs.getString("staff_cod"),rs.getString("name"),rs.getString("function"),Corrector.ConvertToJava(rs.getString("data_reg"))});
             }
         } catch (SQLException ex) {
             Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -98,6 +99,8 @@ public class StaffDAO {
                 staffBeans.setCode(rs.getInt("staff_cod"));
                 staffBeans.setName(rs.getString("name"));
                 staffBeans.setDateReg(Corrector.ConvertToJava(rs.getString("data_reg")));
+                staffBeans.setFunction(rs.getString("function"));
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +121,7 @@ public class StaffDAO {
             
             st.execute();
             Connec.getConnection().commit(); //enable commit
-            JOptionPane.showMessageDialog(null,"Registration edited.","Saved", 0, new ImageIcon("./images/ok.png"));
+            JOptionPane.showMessageDialog(null,"Registration edited.","Saved", 0, new ImageIcon(getClass().getResource("/Icons/ok.png")));
             
         } catch (SQLException ex) {
             Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
