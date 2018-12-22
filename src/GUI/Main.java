@@ -16,6 +16,7 @@ public class Main extends javax.swing.JFrame {
    
     ScreenBackground screen;
     ClientScreen clientScreen;
+    StaffScreen staffScreen;
     
     public Main() {
         initComponents();
@@ -90,6 +91,11 @@ public class Main extends javax.swing.JFrame {
         menuStaff.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         menuStaff.setText("Staff");
         menuStaff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuStaffActionPerformed(evt);
+            }
+        });
         jMenu1.add(menuStaff);
 
         menuMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -147,6 +153,14 @@ public class Main extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_menu_clientActionPerformed
+
+    private void menuStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuStaffActionPerformed
+        //Refactor to use singleton and avoid many windows to open
+        staffScreen = new StaffScreen();
+        screen.add(staffScreen);
+        staffScreen.setVisible(true);
+        
+    }//GEN-LAST:event_menuStaffActionPerformed
 
     /**
      * @param args the command line arguments
