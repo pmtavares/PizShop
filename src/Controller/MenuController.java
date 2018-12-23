@@ -27,12 +27,11 @@ public class MenuController {
             JOptionPane.showMessageDialog(null,"Fill out the description.","Error", JOptionPane.WARNING_MESSAGE, new ImageIcon(getClass().getResource("/Icons/delete.png")));
             return false;
         }
-        if(model.getType().equals("Select a type"))
+        if(model.getType().equals("Select an item"))
         {
             JOptionPane.showMessageDialog(null,"Fill out the type.","Error", JOptionPane.WARNING_MESSAGE, new ImageIcon(getClass().getResource("/Icons/delete.png")));
             return false;
         }
-
         menuDAO.registerStaff(model);
         return true;
     }
@@ -44,7 +43,7 @@ public class MenuController {
             JOptionPane.showMessageDialog(null,"Fill out the description.","Error", JOptionPane.WARNING_MESSAGE, new ImageIcon(getClass().getResource("/Icons/delete.png")));
             return false;
         }
-        if(model.getType().equals(""))
+        if(model.getType().equals("Select an item"))
         {
             JOptionPane.showMessageDialog(null,"Fill out the type.","Error", JOptionPane.WARNING_MESSAGE, new ImageIcon(getClass().getResource("/Icons/delete.png")));
             return false;

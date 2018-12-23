@@ -34,7 +34,7 @@ public class MenuDAO {
             
             st.execute();
             Connec.getConnection().commit(); //enable commit
-            JOptionPane.showMessageDialog(null,"Registration saved.","Saved", 0, new ImageIcon(getClass().getResource("/Icons/ok.png")));
+            JOptionPane.showMessageDialog(null,"Record saved.","Saved", 0, new ImageIcon(getClass().getResource("/Icons/ok.png")));
             
         } catch (SQLException ex) {
             Logger.getLogger(MenuDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,7 +119,7 @@ public class MenuDAO {
             
             st.execute();
             Connec.getConnection().commit(); //enable commit
-            JOptionPane.showMessageDialog(null,"Registration edited.","Saved", 0, new ImageIcon(getClass().getResource("/Icons/ok.png")));
+            JOptionPane.showMessageDialog(null,"Record edited.","Saved", 0, new ImageIcon(getClass().getResource("/Icons/ok.png")));
             
         } catch (SQLException ex) {
             Logger.getLogger(MenuDAO.class.getName()).log(Level.SEVERE, null, ex);

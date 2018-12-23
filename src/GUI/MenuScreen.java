@@ -250,16 +250,21 @@ public class MenuScreen extends javax.swing.JInternalFrame {
         cleanFields();
         enableFields(true);
         txt_code.setText(menuController.checkNextRecord());
+        txt_value.setText("0.0");
         btn_register.setEnabled(true);
         btn_edit.setEnabled(false);
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
         fillMenuBeans();
-        menuController.verifyData(menuB);
-        cleanFields();
-        btn_register.setEnabled(false);
-        btn_edit.setEnabled(false);
+        if(menuController.verifyData(menuB))
+        {
+            cleanFields();
+            btn_register.setEnabled(false);
+            btn_edit.setEnabled(false);        
+        }
+        
+        
     }//GEN-LAST:event_btn_registerActionPerformed
 
     private void txt_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchKeyReleased
@@ -281,12 +286,15 @@ public class MenuScreen extends javax.swing.JInternalFrame {
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         fillMenuBeans();
-        menuController.verifyDataEdit(menuB);
-        cleanFields();
-        btn_edit.setEnabled(false);
-        tModel.setNumRows(0);
-        menuController.controlSearch(txt_search.getText(), tModel);
-        
+        if(menuController.verifyDataEdit(menuB))
+        {
+            cleanFields();
+            btn_register.setEnabled(false);
+            btn_edit.setEnabled(false); 
+            tModel.setNumRows(0);
+            menuController.controlSearch(txt_search.getText(), tModel);
+        }         
+
     }//GEN-LAST:event_btn_editActionPerformed
 
 
