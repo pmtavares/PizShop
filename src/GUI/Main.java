@@ -18,6 +18,7 @@ public class Main extends javax.swing.JFrame {
     ClientScreen clientScreen;
     StaffScreen staffScreen;
     DelivererScreen delivererScreen;
+    MenuScreen menuScreen;
     
     public Main() {
         initComponents();
@@ -102,6 +103,11 @@ public class Main extends javax.swing.JFrame {
         menuMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         menuMenu.setText("Menu");
         menuMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuMenuActionPerformed(evt);
+            }
+        });
         jMenu1.add(menuMenu);
 
         menuDeliverer.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -181,6 +187,19 @@ public class Main extends javax.swing.JFrame {
         }
        
     }//GEN-LAST:event_menuDelivererActionPerformed
+
+    private void menuMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMenuActionPerformed
+        menuScreen = MenuScreen.getInstance();
+        if(!menuScreen.isShowing())
+        {
+            screen.add(menuScreen);
+            menuScreen.show();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Window is already opened","Info", JOptionPane.WARNING_MESSAGE, new ImageIcon(getClass().getResource("/Icons/info-64.png")));
+        }
+    }//GEN-LAST:event_menuMenuActionPerformed
 
     /**
      * @param args the command line arguments
