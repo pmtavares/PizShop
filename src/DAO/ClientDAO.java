@@ -6,6 +6,7 @@ import Utility.Corrector;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -78,6 +79,23 @@ public class ClientDAO {
             while(rs.next())
             {
                 model.addRow(new Object[]{rs.getString("cli_cod"),rs.getString("cli_name"),rs.getString("cli_street"),rs.getString("cli_region"),rs.getString("cli_phone")});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Error to search client","Error", 0, new ImageIcon("./images/btn_sair.png"));
+            
+        }
+    }
+    
+    public void searchClient(String search, List<String> list)
+    {
+        String SQLSelection = "SELECT * FROM clients WHERE cli_name LIKE '%" + search + "%' ";
+        try {            
+            PreparedStatement st = Connec.getConnection().prepareStatement(SQLSelection);
+            ResultSet rs = st.executeQuery();
+            while(rs.next())
+            {
+                list.add(rs.getString("cli_cod") + " - " +  rs.getString("cli_name") + " - " + rs.getString("cli_phone"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);

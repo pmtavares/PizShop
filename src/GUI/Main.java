@@ -19,18 +19,19 @@ public class Main extends javax.swing.JFrame {
     StaffScreen staffScreen;
     DelivererScreen delivererScreen;
     MenuScreen menuScreen;
+    OrdersScreen orderScreen;
     
     public Main() {
-        initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setLayout(new GridLayout());
+       initComponents();
+       setExtendedState(JFrame.MAXIMIZED_BOTH);
+       setLayout(new GridLayout());
        // screen = new ScreenBackground("src/Icons/pizzeria-background1.jpg");  
        screen = new ScreenBackground("/Icons/pizzeria-background1.jpg");
-        getContentPane().add(screen);
+       getContentPane().add(screen);
         //Menu Icons
-        setMenuIcons(main_menu);
+       setMenuIcons(main_menu);
         //Form Icon
-        setFormIconImage();
+       setFormIconImage();
         
     }
     
@@ -67,7 +68,7 @@ public class Main extends javax.swing.JFrame {
         menuMenu = new javax.swing.JMenuItem();
         menuDeliverer = new javax.swing.JMenuItem();
         menu_till = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        menuOrder = new javax.swing.JMenuItem();
         menu_report = new javax.swing.JMenu();
         menu_exit = new javax.swing.JMenu();
 
@@ -126,8 +127,15 @@ public class Main extends javax.swing.JFrame {
         menu_till.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menu_till.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenuItem5.setText("Orders");
-        menu_till.add(jMenuItem5);
+        menuOrder.setText("Orders");
+        menuOrder.setName("menuOrder"); // NOI18N
+        menuOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuOrderActionPerformed(evt);
+            }
+        });
+        menu_till.add(menuOrder);
+        menuOrder.getAccessibleContext().setAccessibleName("menuOrder");
 
         main_menu.add(menu_till);
 
@@ -201,6 +209,12 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuMenuActionPerformed
 
+    private void menuOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuOrderActionPerformed
+        orderScreen = new OrdersScreen();
+        screen.add(orderScreen);
+        orderScreen.show();
+    }//GEN-LAST:event_menuOrderActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -238,10 +252,10 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuBar main_menu;
     private javax.swing.JMenuItem menuDeliverer;
     private javax.swing.JMenuItem menuMenu;
+    private javax.swing.JMenuItem menuOrder;
     private javax.swing.JMenuItem menuStaff;
     private javax.swing.JMenuItem menu_client;
     private javax.swing.JMenu menu_exit;

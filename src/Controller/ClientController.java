@@ -2,6 +2,7 @@ package Controller;
 
 import Beans.ClientBeans;
 import DAO.ClientDAO;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -70,6 +71,11 @@ public class ClientController {
     public void controlSearch(String search, DefaultTableModel model)
     {
         clientDao.searchClient(search, model);
+    }
+    
+    public void controlSearch(String search, List<String> list)
+    {
+        clientDao.searchClient(search, list);
     }
     
     public  ClientBeans fillFields(int code)
