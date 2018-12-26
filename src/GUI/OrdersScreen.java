@@ -1,9 +1,12 @@
 package GUI;
 
 import Beans.ClientBeans;
+import Beans.OrderBeans;
 import Controller.ClientController;
+import Controller.OrderController;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Spliterator;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
@@ -15,16 +18,22 @@ import javax.swing.text.MaskFormatter;
 public class OrdersScreen extends javax.swing.JInternalFrame {
     MaskFormatter formatPhone;
     ClientBeans clientB;
+    OrderBeans orderB;
+    OrderController orderController;
     ClientController clientController;
     List<String> clientList;
-
+    List<String> itemsList;
 
     public OrdersScreen() {
         initComponents();
         enableFields(false);
         clientList = new ArrayList<>();
+        itemsList = new ArrayList<>();
         clientB = new ClientBeans();
+        orderB = new OrderBeans();
+        orderController = new OrderController();
         clientController = new ClientController();
+        PanelFather.setEnabledAt(1, false);
     }
 
 
@@ -106,6 +115,11 @@ public class OrdersScreen extends javax.swing.JInternalFrame {
         });
 
         cb_clients.setName("cb_clients"); // NOI18N
+        cb_clients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_clientsActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Code:");
@@ -149,6 +163,11 @@ public class OrdersScreen extends javax.swing.JInternalFrame {
         btn_clientOrder.setText("Order");
         btn_clientOrder.setToolTipText("");
         btn_clientOrder.setName("btn_clientOrder"); // NOI18N
+        btn_clientOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clientOrderActionPerformed(evt);
+            }
+        });
 
         btn_clientClose.setText("Close");
         btn_clientClose.setActionCommand("btn_clientClose");
@@ -255,11 +274,15 @@ public class OrdersScreen extends javax.swing.JInternalFrame {
 
         txt_item.setToolTipText("");
         txt_item.setName("txt_item"); // NOI18N
+        txt_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_itemActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("Select");
 
-        cb_select_item.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cb_select_item.setName("cb_select_item"); // NOI18N
         cb_select_item.setOpaque(false);
 
@@ -443,6 +466,37 @@ public class OrdersScreen extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_btn_searchClientActionPerformed
+
+    private void cb_clientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_clientsActionPerformed
+        if(!(cb_clients.getSelectedItem() == null))
+        {
+            String getCod = cb_clients.getSelectedItem().toString();
+            
+            String cod = getCod.substring(0, getCod.indexOf(" "));
+            clientB = clientController.fillFields(Integer.parseInt(cod));
+            
+            txt_code.setText(clientB.getCode() + "");
+            txt_name.setText(clientB.getName());
+            txt_street.setText(clientB.getStreet());
+            txt_region.setText(clientB.getRegion());
+            txt_phone.setText(clientB.getPhone());
+            txt_date.setText(clientB.getDateReg());
+        }
+    }//GEN-LAST:event_cb_clientsActionPerformed
+
+    private void btn_clientOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clientOrderActionPerformed
+        PanelFather.setEnabledAt(1, true);
+        PanelFather.setEnabledAt(0, false);
+        PanelFather.setSelectedIndex(1);
+    }//GEN-LAST:event_btn_clientOrderActionPerformed
+
+    private void txt_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_itemActionPerformed
+        cb_select_item.removeAllItems();
+        itemsList.clear();
+        orderController.searchItems(txt_item.getText(), itemsList);
+        //Same as for loop
+        itemsList.forEach((item) -> cb_select_item.addItem(item) );
+    }//GEN-LAST:event_txt_itemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

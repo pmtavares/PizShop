@@ -317,6 +317,7 @@ public class ClientScreen extends javax.swing.JInternalFrame {
         txt_street.setText(clientB.getStreet());
         txt_region.setText(clientB.getRegion());
         txt_phone.setText(clientB.getPhone());
+        txt_date.setText(clientB.getDateReg());
         enableFields(true);
     }//GEN-LAST:event_tb_clientsMouseClicked
 

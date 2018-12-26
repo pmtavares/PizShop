@@ -78,7 +78,7 @@ public class ClientDAO {
             ResultSet rs = st.executeQuery();
             while(rs.next())
             {
-                model.addRow(new Object[]{rs.getString("cli_cod"),rs.getString("cli_name"),rs.getString("cli_street"),rs.getString("cli_region"),rs.getString("cli_phone")});
+                model.addRow(new Object[]{rs.getString("cli_cod"),rs.getString("cli_name"),rs.getString("cli_street"),rs.getString("cli_region"),rs.getString("cli_phone"), rs.getString("cli_data_reg")});
             }
         } catch (SQLException ex) {
             Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);

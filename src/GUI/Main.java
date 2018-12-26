@@ -49,6 +49,7 @@ public class Main extends javax.swing.JFrame {
        menu.getMenu(0).getItem(1).setIcon(new ImageIcon(getClass().getResource("/Icons/ico_staff.png")));
        menu.getMenu(0).getItem(2).setIcon(new ImageIcon(getClass().getResource("/Icons/ico_menu.png")));
        menu.getMenu(0).getItem(3).setIcon(new ImageIcon(getClass().getResource("/Icons/ico_boy.png")));
+       menu.getMenu(1).getItem(0).setIcon(new ImageIcon(getClass().getResource("/Icons/icon_order.png")));
     }
 
     private void setFormIconImage()
